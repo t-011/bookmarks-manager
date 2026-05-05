@@ -13,7 +13,6 @@ async def get_current_user(creds: HTTPAuthorizationCredentials = Depends(securit
     creds.credentials
     try:
         payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
-        return payload
+        return payload["sub"]
     except:
         raise HTTPException(status_code=401, detail="Invalid token")
-        

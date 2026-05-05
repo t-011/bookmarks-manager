@@ -10,7 +10,7 @@ async def register(user: UserRegister):
         "email": user.email,
         "password": user.password
     })
-    return res
+    return res.user
 
 @router.post("/login")
 async def login(user: UserLogin):
@@ -18,4 +18,4 @@ async def login(user: UserLogin):
         "email": user.email,
         "password": user.password
     })
-    return res
+    return res.session
