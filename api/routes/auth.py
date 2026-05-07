@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from models import UserLogin, UserRegister
-from database import supabase
+from api.models import UserLogin, UserRegister
+from api.database import supabase
 
 router = APIRouter()
 
@@ -10,6 +10,7 @@ async def register(user: UserRegister):
         "email": user.email,
         "password": user.password
     })
+
     return res.user
 
 @router.post("/login")

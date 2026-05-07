@@ -6,13 +6,14 @@ import os
 
 load_dotenv()
 
+JWT_SECRET = os.getenv("JWT_SECRET")
+
 security = HTTPBearer()
-jwt_secret = os.environ.get("JWT_SECRET")
 
 async def get_current_user(creds: HTTPAuthorizationCredentials = Depends(security)):
-    creds.credentials
+    token = creds.credentials
     try:
-        payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
+        payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"], audience="authenticated")
         return payload["sub"]
-    except:
-        raise HTTPException(status_code=401, detail="Invalid token")
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))

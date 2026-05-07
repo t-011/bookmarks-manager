@@ -4,7 +4,8 @@ from datetime import datetime
 class UserRegister(BaseModel):
     email: str
     password: str
-    name: str
+    tenant_name: str
+    tenant_id: str
 
 class UserLogin(BaseModel):
     email: str
